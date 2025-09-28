@@ -1,0 +1,66 @@
+.dashboard {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-logout { background-color: #f02849; color: white; }
+.btn-upload { background-color: #42b72a; color: white; }
+.btn-download { background-color: #1877f2; color: white; }
+.btn-delete { background-color: #e4e6eb; color: #4b4f56; margin-left: 5px; }
+
+.upload-section {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f7f8fa;
+}
+.upload-section input[type="text"], .upload-section input[type="file"] {
+  margin-right: 10px;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.file-item:hover {
+  background-color: #f0f2f5;
+  transform: scale(1.01);
+}
+.file-name { font-weight: 500; }
+.folder-item { cursor: pointer; }
+.folder-item .file-name { color: #1877f2; }
