@@ -4,7 +4,7 @@ A complete cloud file storage system built with the MERN stack (MongoDB, Express
 
 **Live Demo:** [https://cloud-storage-project-nine.vercel.app](https://cloud-storage-project-nine.vercel.app)
 
-![Project Screenshot](./assets/dashboard.png)
+![Project Screenshot](./assets/Dashboard.png)
 
 ---
 
