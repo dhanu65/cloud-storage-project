@@ -14,7 +14,8 @@ const Login = ({ onLoginSuccess }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', { username, password });
+      const url = `${process.env.REACT_APP_API_URL}/api/users/login`;
+      const res = await axios.post(url, { username, password });
       localStorage.setItem('token', res.data.token);
       toast.success('Login successful!');
       onLoginSuccess();

@@ -12,11 +12,13 @@ const Dashboard = ({ onLogout }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const fetchContent = useCallback(async (folderId = null) => {
     const token = localStorage.getItem('token');
     if (!token) { navigate('/auth'); return; }
     try {
-      const url = folderId ? `http://localhost:5000/api/files/content/${folderId}` : 'http://localhost:5000/api/files/content';
+      const url = folderId ? `${API_URL}/api/files/content/${folderId}` : `${API_URL}/api/files/content`;
       const config = { headers: { 'x-auth-token': token } };
       const res = await axios.get(url, config);
       setFolders(res.data.folders);
@@ -26,7 +28,7 @@ const Dashboard = ({ onLogout }) => {
       localStorage.removeItem('token');
       navigate('/auth');
     }
-  }, [navigate]);
+  }, [navigate, API_URL]);
 
   useEffect(() => {
     fetchContent();
@@ -38,7 +40,7 @@ const Dashboard = ({ onLogout }) => {
     try {
       const config = { headers: { 'x-auth-token': token } };
       const body = { name: newFolderName, parentFolder: currentFolder };
-      await axios.post('http://localhost:5000/api/files/folder', body, config);
+      await axios.post(`${API_URL}/api/files/folder`, body, config);
       toast.success(`Folder "${newFolderName}" created!`);
       setNewFolderName('');
       fetchContent(currentFolder);
@@ -57,7 +59,7 @@ const Dashboard = ({ onLogout }) => {
     if (currentFolder) { formData.append('parentFolder', currentFolder); }
     try {
       const config = { headers: { 'Content-Type': 'multipart/form-data', 'x-auth-token': token } };
-      await axios.post('http://localhost:5000/api/files/upload', formData, config);
+      await axios.post(`${API_URL}/api/files/upload`, formData, config);
       toast.success('File uploaded successfully!');
       document.querySelector('input[type="file"]').value = '';
       setSelectedFile(null);
@@ -72,7 +74,7 @@ const Dashboard = ({ onLogout }) => {
       const token = localStorage.getItem('token');
       try {
         const config = { headers: { 'x-auth-token': token } };
-        await axios.delete(`http://localhost:5000/api/files/${fileId}`, config);
+        await axios.delete(`${API_URL}/api/files/${fileId}`, config);
         toast.success('File deleted successfully!');
         fetchContent(currentFolder);
       } catch (err) {
@@ -86,7 +88,7 @@ const Dashboard = ({ onLogout }) => {
       const token = localStorage.getItem('token');
       try {
         const config = { headers: { 'x-auth-token': token } };
-        await axios.delete(`http://localhost:5000/api/files/folder/${folderId}`, config);
+        await axios.delete(`${API_URL}/api/files/folder/${folderId}`, config);
         toast.success('Folder deleted successfully!');
         fetchContent(currentFolder);
       } catch (err) {
@@ -99,7 +101,7 @@ const Dashboard = ({ onLogout }) => {
     const token = localStorage.getItem('token');
     try {
       const config = { headers: { 'x-auth-token': token }, responseType: 'blob' };
-      const res = await axios.get(`http://localhost:5000/api/files/download/${fileId}`, config);
+      const res = await axios.get(`${API_URL}/api/files/download/${fileId}`, config);
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement('a');
       link.href = url;

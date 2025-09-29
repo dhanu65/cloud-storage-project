@@ -11,7 +11,8 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/users/register', { username, password });
+      const url = `${process.env.REACT_APP_API_URL}/api/users/register`;
+      await axios.post(url, { username, password });
       toast.success('Registration successful! Please log in.');
     } catch (err) {
       toast.error('Registration failed: User may already exist.');
